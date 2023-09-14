@@ -5,13 +5,20 @@ import invariant from '../utils/common/invariant'
 
 import type Database from '../Database'
 
-export default function useDatabase(): Database {
-  const database = React.useContext(DatabaseContext)
+export function useDatabase({database}): Database {
+  const databases = React.useContext(DatabaseContext);
+
+  invariant(
+    databases,
+    'Could not find database context, please make sure the component is wrapped in the <DatabaseProvider>',
+  );
+
+  const databaseInstance = databases[database];
 
   invariant(
     database,
-    'Could not find database context, please make sure the component is wrapped in the <DatabaseProvider>',
-  )
+    `Could not find database instance with the key '${database}'`,
+  );
 
-  return database
+  return databaseInstance;
 }

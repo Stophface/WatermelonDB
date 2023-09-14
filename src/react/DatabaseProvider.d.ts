@@ -2,7 +2,7 @@ import { ReactNode } from 'react'
 import Database from '../Database'
 
 export type Props = {
-  database: Database
+  databases: {[key: string]: Database}
   children: ReactNode
 }
 
@@ -10,7 +10,7 @@ export type Props = {
  * Database provider to create the database context
  * to allow child components to consume the database without prop drilling
  */
-declare function DatabaseProvider({ children, database }: Props): JSX.Element
+declare function DatabaseProvider({ children, databases }: Props): JSX.Element
 
 export { default as withDatabase } from './withDatabase'
 export { default as DatabaseContext, DatabaseConsumer } from './DatabaseContext'
